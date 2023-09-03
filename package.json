@@ -1,0 +1,104 @@
+{
+	"name": "code-sudoku",
+	"version": "1.0.0",
+	"description": "Vscode Sudoku Game",
+	"main": "./build/extension.js",
+	"author": "ameer <smartameer@icloud.com>",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"contributes": {
+		"views": {
+			"explorer": [
+				{
+					"type": "webview",
+					"id": "sudoku.game",
+					"name": "Sudoku",
+					"visibility": "visible",
+					"contextualTitle": "Sudoku",
+					"initialSize": 260
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "sudoku.new",
+				"category": "Sudoku",
+				"title": "New game",
+				"icon": "$(empty-window)",
+				"shortTitle": "New"
+			},
+			{
+				"command": "sudoku.solve",
+				"category": "Sudoku",
+				"title": "Solve game",
+				"icon": "$(play)",
+				"shortTitle": "Solve"
+			},
+			{
+				"command": "sudoku.info",
+				"category": "Sudoku",
+				"title": "About",
+				"icon": "$(info)",
+				"shortTitle": "About"
+			},
+			{
+				"command": "sudoku.validate",
+				"category": "Sudoku",
+				"title": "Validate game",
+				"icon": "$(check-all)",
+				"shortTitle": "Validate"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "sudoku.new",
+					"group": "navigation",
+					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.solve",
+					"group": "navigation",
+					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.info",
+					"group": "navigation",
+					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.validate",
+					"group": "navigation",
+					"when": "view == sudoku.game"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -w -p ./"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^6.4.0",
+		"@typescript-eslint/parser": "^5.48.2",
+		"eslint": "^8.0.1",
+		"eslint-config-standard-with-typescript": "^39.0.0",
+		"eslint-plugin-import": "^2.25.2",
+		"eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+		"eslint-plugin-promise": "^6.0.0",
+		"typescript": "*"
+	}
+}

@@ -1,0 +1,65 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.sudoku-container {
+  margin: 20px auto 0;
+  position: relative;
+  border-collapse: collapse;
+  border: 3px solid var(--vscode-panel-border);
+}
+.sudoku-container tr td:nth-child(3),
+.sudoku-container tr td:nth-child(6) {
+  border-right: 3px solid var(--vscode-panel-border);
+}
+.sudoku-container tr:nth-child(3),
+.sudoku-container tr:nth-child(6) {
+  border-bottom: 3px solid var(--vscode-panel-border);
+}
+.sudoku-container tr > td,
+.sudoku-container tr {
+  border-spacing: none;
+  border: 1px solid var(--vscode-panel-border);
+}
+.sudoku-container input {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+  background-color: var(--vscode-input-background);
+  border: none;
+  color: var(--vscode-foreground);
+}
+.sudoku-container input:focus {
+  background-color: var(--vscode-input-background);
+  outline: none;
+}
+.sudoku-container input.highlight {
+  background-color: var(--vscode-inputValidation-infoBackground);
+}
+.sudoku-container input.disabled {
+  cursor: not-allowed;
+  background-color: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  opacity: 0.5;
+}
+.sudoku-container input.disabled.highlight {
+  background-color: var(--vscode-inputValidation-infoBackground);
+}
+.sudoku-container .invalid {
+  background-color: var(--vscode-inputValidation-errorBackground);
+}
+.sudoku-container .invalid:focus {
+  background-color: var(--vscode-inputValidation-errorBackground);
+}
+.sudoku-container.valid-matrix {
+  background-color: #4c9689;
+}
+.sudoku-container.valid-matrix input {
+  color: #2e7266;
+}

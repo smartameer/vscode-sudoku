@@ -9,15 +9,14 @@ export function activate (context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.commands.registerCommand('sudoku.new', async () => {
       await provider.newGame()
+      await vscode.window.showInformationMessage('A new game is started')
     }),
     vscode.commands.registerCommand('sudoku.solve', async () => {
       await provider.solveGame()
+      await vscode.window.showInformationMessage('Current game is solved')
     }),
     vscode.commands.registerCommand('sudoku.validate', async () => {
       await provider.validateGame()
-    }),
-    vscode.commands.registerCommand('sudoku.info', () => {
-      // console.log('info')
     })
   )
 }

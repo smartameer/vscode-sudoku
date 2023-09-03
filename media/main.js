@@ -613,6 +613,7 @@
 
       isValid = this.game.validateMatrix()
       this.game.table.classList.toggle('valid-matrix', isValid)
+      return isValid
     },
 
     /**

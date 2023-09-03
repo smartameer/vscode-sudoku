@@ -8,6 +8,10 @@
 	"engines": {
 		"vscode": "^1.74.0"
 	},
+	"repository": {
+		"url": "https://github.com/smartameer/vscode-sudoku",
+		"type": "github"
+	},
 	"extensionKind": [
 		"ui",
 		"workspace"
@@ -45,13 +49,6 @@
 				"shortTitle": "Solve"
 			},
 			{
-				"command": "sudoku.info",
-				"category": "Sudoku",
-				"title": "About",
-				"icon": "$(info)",
-				"shortTitle": "About"
-			},
-			{
 				"command": "sudoku.validate",
 				"category": "Sudoku",
 				"title": "Validate game",
@@ -68,12 +65,7 @@
 				},
 				{
 					"command": "sudoku.solve",
-					"group": "navigation",
-					"when": "view == sudoku.game"
-				},
-				{
-					"command": "sudoku.info",
-					"group": "navigation",
+					"group": "7_modification",
 					"when": "view == sudoku.game"
 				},
 				{

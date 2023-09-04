@@ -22,9 +22,8 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.options = {
       enableScripts: true,
-
       localResourceRoots: [
-        this._extensionUri
+        vscode.Uri.joinPath(this._extensionUri, 'media')
       ]
     }
 
@@ -40,12 +39,12 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
 
   private getWebviewContent (webview: vscode.Webview): string {
     const nonce = this.getNonce()
-    const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'media', 'main.js')
-    )
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'media', 'main.css')
-    )
+    const scriptGamePathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'game.js')
+    const scriptGameUri = webview.asWebviewUri(scriptGamePathOnDisk)
+    const scriptPathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'main.js')
+    const scriptUri = webview.asWebviewUri(scriptPathOnDisk)
+    const stylesPathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'main.css')
+    const styleMainUri = webview.asWebviewUri(stylesPathOnDisk)
 
     return `<!DOCTYPE html>
       <html lang="en">
@@ -60,6 +59,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
           <div class="wrap">
             <div class="container"></div>
           </div>
+          <script nonce="${nonce}" src="${scriptGameUri.toString()}"></script>
           <script nonce="${nonce}" src="${scriptUri.toString()}"></script>
         </body>
       </html>`

@@ -3,11 +3,20 @@
 	"version": "1.0.0",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
-	"author": "ameer <smartameer@icloud.com>",
+	"author": {
+		"name": "ameer <smartameer@icloud.com>"
+	},
+	"publisher": "ameer",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.74.0"
 	},
+	"keywords": [
+        "sudoku",
+        "game",
+        "vscode"
+    ],
+	"pricing": "Free",
 	"repository": {
 		"url": "https://github.com/smartameer/vscode-sudoku",
 		"type": "github"
@@ -28,6 +37,23 @@
 	"icon": "media/sudoku_128x128.png",
 	"activationEvents": [],
 	"contributes": {
+		"configuration": [
+			{
+				"title": "Sudoku",
+				"properties": {
+					"sudoku.gameLevel": {
+						"title": "Game level",
+						"type": "string",
+						"enum": [
+							"easy",
+							"normal",
+							"hard"
+						],
+						"default": "easy"
+					}
+				}
+			}
+		],
 		"views": {
 			"explorer": [
 				{
@@ -61,23 +87,35 @@
 				"title": "Validate game",
 				"icon": "$(check-all)",
 				"shortTitle": "Validate"
+			},
+			{
+				"command": "sudoku.settings",
+				"category": "Sudoku",
+				"title": "Game level",
+				"icon": "$(wrench)",
+				"shortTitle": "Validate"
 			}
 		],
 		"menus": {
 			"view/title": [
 				{
-					"command": "sudoku.new",
-					"group": "navigation",
+					"command": "sudoku.settings",
+					"group": "navigation@4",
 					"when": "view == sudoku.game"
 				},
 				{
-					"command": "sudoku.solve",
-					"group": "7_modification",
+					"command": "sudoku.new",
+					"group": "navigation@2",
 					"when": "view == sudoku.game"
 				},
 				{
 					"command": "sudoku.validate",
-					"group": "navigation",
+					"group": "navigation@1",
+					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.solve",
+					"group": "navigation@3",
 					"when": "view == sudoku.game"
 				}
 			]

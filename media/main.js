@@ -665,6 +665,9 @@ window.addEventListener('message', event => {
 
   switch (message.command) {
     case 'new':
+      if (message.hasOwnProperty('level')) {
+        game.game.config.difficulty = message.level || 'easy'
+      }
       game.newGame()
       break
     case 'solve':

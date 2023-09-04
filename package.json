@@ -12,6 +12,12 @@
 		"url": "https://github.com/smartameer/vscode-sudoku",
 		"type": "github"
 	},
+	"funding": [
+		{
+			"type": "buymeacoffee",
+		  	"url": "https://www.buymeacoffee.com/smartameer"
+		}
+	],
 	"extensionKind": [
 		"ui",
 		"workspace"
@@ -19,6 +25,7 @@
 	"categories": [
 		"Other"
 	],
+	"icon": "media/sudoku_128x128.png",
 	"activationEvents": [],
 	"contributes": {
 		"views": {

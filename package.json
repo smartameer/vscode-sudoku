@@ -1,5 +1,6 @@
 {
 	"name": "code-sudoku",
+	"displayName": "Sudoku",
 	"version": "1.0.0",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
@@ -34,7 +35,7 @@
 	"categories": [
 		"Other"
 	],
-	"icon": "media/sudoku_128x128.png",
+	"icon": "media/logo_128x128.png",
 	"activationEvents": [],
 	"contributes": {
 		"configuration": [

@@ -47,14 +47,17 @@ export function activate (context: vs.ExtensionContext): void {
           description: 'Hard mode'
         }
       ]
-      quickPick.onDidChangeSelection(selection => {
-        if (selection.length > 0) {
+      quickPick.onDidChangeSelection(async (selection) => {
+        if (selection.length > 0 && level !== selection[0].label) {
           void vs.workspace.getConfiguration().update(
             'sudoku.gameLevel',
             selection[0].label,
             vs.ConfigurationTarget.Global
           )
+          await provider.newGame()
         }
+        quickPick.hide()
+        return true
       })
       quickPick.onDidHide(() => quickPick.dispose)
       quickPick.show()

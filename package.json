@@ -1,12 +1,9 @@
 {
 	"name": "code-sudoku",
-	"displayName": "Sudoku",
+	"displayName": "Sudoku Game",
 	"version": "1.0.0",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
-	"author": {
-		"name": "ameer <smartameer@icloud.com>"
-	},
 	"publisher": "ameer",
 	"license": "MIT",
 	"engines": {

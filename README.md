@@ -24,3 +24,14 @@ Sudoku is a logic puzzle game that involves filling a 9x9 grid with numbers from
 - New game
 - Validate game
 - Solve game
+
+### Author
+---
+[![Ameer](https://avatars.githubusercontent.com/u/5998873?v=4&s=70)](https://github.com/smartameer) |
+:---: |
+[ameer](https://github.com/smartameer) |
+
+
+### LICENSE
+---
+MIT

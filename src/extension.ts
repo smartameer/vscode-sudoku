@@ -10,12 +10,12 @@ export function activate (context: vs.ExtensionContext): void {
 
   context.subscriptions.push(
     vs.commands.registerCommand('sudoku.new', async () => {
-      const selection = await vs.window.showInformationMessage(
+      const ack = await vs.window.showInformationMessage(
         'Do you want to start a new game?',
         'Yes',
         'No'
       )
-      if (selection === 'Yes') {
+      if (ack === 'Yes') {
         await provider.newGame()
       }
     }),
@@ -53,8 +53,18 @@ export function activate (context: vs.ExtensionContext): void {
             'sudoku.gameLevel',
             selection[0].label,
             vs.ConfigurationTarget.Global
-          )
-          await provider.newGame()
+          ).then(async () => {
+            const ack = await vs.window.showInformationMessage(
+              'Do you want to start a new game in ' + selection[0].label + ' mode?',
+              'Yes',
+              'No'
+            )
+            if (ack === 'Yes') {
+              await provider.newGame()
+            } else {
+              await vs.window.showInformationMessage('Your next game will be in ' + selection[0].label + ' mode.')
+            }
+          })
         }
         quickPick.hide()
         return true

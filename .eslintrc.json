@@ -1,13 +1,25 @@
 {
-    "env": {
-        "es2021": true,
-        "browser": true
-    },
-    "extends": "standard-with-typescript",
+    "root": true,
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest",
+        "ecmaVersion": 6,
         "sourceType": "module"
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
-    }
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/semi": ["error", "never"],
+        "curly": "warn",
+        "eqeqeq": "warn",
+        "no-throw-literal": "warn",
+        "semi": ["error", "never"]
+    },
+    "ignorePatterns": [
+        "build",
+        "media",
+        "dist",
+        "**/*.d.ts"
+    ]
 }

@@ -3,7 +3,7 @@ import * as vscode from 'vscode'
 export default class SudokuGameProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = 'sudoku.game'
   private _view?: vscode.WebviewView
-  public static MODES = {
+  public static MODE = {
     EASY: 'easy',
     NORMAL: 'normal',
     HARD: 'hard'
@@ -31,7 +31,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
     if (!vscode.workspace.getConfiguration().has('sudoku.gameLevel')) {
       void vscode.workspace.getConfiguration().update(
         'sudoku.gameLevel',
-        SudokuGameProvider.MODES.EASY,
+        SudokuGameProvider.MODE.EASY,
         vscode.ConfigurationTarget.Global
       )
     }

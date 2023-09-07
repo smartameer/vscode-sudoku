@@ -7,7 +7,7 @@
 	"publisher": "ameer",
 	"license": "MIT",
 	"engines": {
-		"vscode": "^1.74.0"
+		"vscode": "^1.81.0"
 	},
 	"keywords": [
         "sudoku",
@@ -126,14 +126,10 @@
 		"watch": "tsc -w -p ./"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.73.0",
-		"@typescript-eslint/eslint-plugin": "^6.4.0",
-		"@typescript-eslint/parser": "^5.48.2",
+		"@types/vscode": "^1.81.0",
+		"@typescript-eslint/eslint-plugin": "^6.4.1",
+    	"@typescript-eslint/parser": "^6.4.1",
 		"eslint": "^8.0.1",
-		"eslint-config-standard-with-typescript": "^39.0.0",
-		"eslint-plugin-import": "^2.25.2",
-		"eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-		"eslint-plugin-promise": "^6.0.0",
-		"typescript": "*"
+		"typescript": "^5.1.6"
 	}
 }

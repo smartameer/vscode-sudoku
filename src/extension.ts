@@ -32,18 +32,18 @@ export function activate (context: vs.ExtensionContext): void {
       quickPick.title = 'Sudoku game level'
       quickPick.items = [
         {
-          label: SudokuGameProvider.MODES.EASY,
-          picked: level === SudokuGameProvider.MODES.EASY,
+          label: SudokuGameProvider.MODE.EASY,
+          picked: level === SudokuGameProvider.MODE.EASY,
           description: 'Easy mode'
         },
         {
-          label: SudokuGameProvider.MODES.NORMAL,
-          picked: level === SudokuGameProvider.MODES.NORMAL,
+          label: SudokuGameProvider.MODE.NORMAL,
+          picked: level === SudokuGameProvider.MODE.NORMAL,
           description: 'Normal mode'
         },
         {
-          label: SudokuGameProvider.MODES.HARD,
-          picked: level === SudokuGameProvider.MODES.HARD,
+          label: SudokuGameProvider.MODE.HARD,
+          picked: level === SudokuGameProvider.MODE.HARD,
           description: 'Hard mode'
         }
       ]

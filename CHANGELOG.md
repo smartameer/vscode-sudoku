@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3] 11-09-2023
+
+### Patch
+
+- Scoreboard added
+- Minor Bug fix
+
 ## [1.0.2] 10-09-2023
 
 ### Patch

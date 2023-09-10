@@ -31,10 +31,17 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
     if (!vscode.workspace.getConfiguration().has('sudoku.gameLevel')) {
       void vscode.workspace.getConfiguration().update(
         'sudoku.gameLevel',
-        SudokuGameProvider.MODE.EASY,
+        SudokuGameProvider.MODE.NORMAL,
         vscode.ConfigurationTarget.Global
       )
     }
+    webviewView.webview.onDidReceiveMessage(message => {
+      switch(message.command) {
+        case 'scoreboard':
+          vscode.commands.executeCommand('setContext', 'sudoku-scoreboard', message.state)
+          break
+      }
+    })
   }
 
   private getWebviewContent (webview: vscode.Webview): string {
@@ -58,6 +65,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
         <body data-vscode-context='{"preventDefaultContextMenuItems":true,"webviewSection":"game"}'>
           <div class="wrap">
             <div class="container"></div>
+            <div class="scoreboard"></div>
           </div>
           <script nonce="${nonce}" src="${scriptGameUri.toString()}"></script>
           <script nonce="${nonce}" src="${scriptUri.toString()}"></script>
@@ -89,5 +97,10 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
   public async validateGame (): Promise<void> {
     const currentView = this._view
     await currentView?.webview.postMessage({ command: 'validate' })
+  }
+
+  public async scoreboard (state: boolean): Promise<void> {
+    const currentView = this._view
+    await currentView?.webview.postMessage({ command: 'scoreboard', state })
   }
 }

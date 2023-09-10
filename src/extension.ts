@@ -23,6 +23,14 @@ export function activate (context: vs.ExtensionContext): void {
       await provider.solveGame()
       await vs.window.showInformationMessage('Current game is solved')
     }),
+    vs.commands.registerCommand('sudoku.scoreboard.show', async () => {
+      await vs.commands.executeCommand('setContext', 'sudoku-scoreboard', true)
+      await provider.scoreboard(true)
+    }),
+    vs.commands.registerCommand('sudoku.scoreboard.hide', async () => {
+      await vs.commands.executeCommand('setContext', 'sudoku-scoreboard', false)
+      await provider.scoreboard(false)
+    }),
     vs.commands.registerCommand('sudoku.validate', async () => {
       await provider.validateGame()
     }),

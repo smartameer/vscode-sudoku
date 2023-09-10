@@ -1,7 +1,7 @@
 {
 	"name": "code-sudoku",
 	"displayName": "Sudoku Game",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
 	"publisher": "ameer",
@@ -47,7 +47,7 @@
 							"normal",
 							"hard"
 						],
-						"default": "easy"
+						"default": "normal"
 					}
 				}
 			}
@@ -93,6 +93,20 @@
 				"title": "Game level",
 				"icon": "$(gear)",
 				"shortTitle": "Validate"
+			},
+			{
+				"command": "sudoku.scoreboard.show",
+				"category": "Sudoku",
+				"title": "Show scoreboard",
+				"icon": "$(verified)",
+				"shortTitle": "Show scoreboard"
+			},
+			{
+				"command": "sudoku.scoreboard.hide",
+				"category": "Sudoku",
+				"title": "Hide scoreboard",
+				"icon": "$(verified-filled)",
+				"shortTitle": "Hide scoreboard"
 			}
 		],
 		"menus": {
@@ -116,6 +130,16 @@
 					"command": "sudoku.solve",
 					"group": "navigation@3",
 					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.scoreboard.show",
+					"group": "navigation@5",
+					"when": "view == sudoku.game && sudoku-scoreboard == false"
+				},
+				{
+					"command": "sudoku.scoreboard.hide",
+					"group": "navigation@5",
+					"when": "view == sudoku.game && sudoku-scoreboard == true"
 				}
 			]
 		}

@@ -1,7 +1,7 @@
 {
 	"name": "code-sudoku",
 	"displayName": "Sudoku Game",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
 	"publisher": "ameer",
@@ -60,7 +60,8 @@
 					"name": "Sudoku",
 					"visibility": "visible",
 					"contextualTitle": "Sudoku",
-					"initialSize": 260
+					"initialSize": 260,
+					"icon": "media/icon.svg"
 				}
 			]
 		},
@@ -90,7 +91,7 @@
 				"command": "sudoku.settings",
 				"category": "Sudoku",
 				"title": "Game level",
-				"icon": "$(wrench)",
+				"icon": "$(gear)",
 				"shortTitle": "Validate"
 			}
 		],

@@ -74,3 +74,5 @@ export function activate (context: vs.ExtensionContext): void {
     })
   )
 }
+
+export function deactivate() {}

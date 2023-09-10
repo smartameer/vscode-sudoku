@@ -55,7 +55,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
           <title>Sudoku</title>
           <link href="${styleMainUri.toString()}" rel="stylesheet">
         </head>
-        <body>
+        <body data-vscode-context='{"preventDefaultContextMenuItems":true,"webviewSection":"game"}'>
           <div class="wrap">
             <div class="container"></div>
           </div>

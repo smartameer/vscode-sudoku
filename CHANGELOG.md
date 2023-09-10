@@ -1,6 +1,14 @@
 # Changelog
 
-## 1.0.1
+## [1.0.2] 10-09-2023
+
+### Patch
+
+- Contrast & color fix
+- Right click disabled
+- Extension icon added
+
+## [1.0.1] 07-09-2023
 
 ### Patch
 
@@ -8,7 +16,7 @@
 
 ---
 
-## 1.0.0
+## [1.0.0] 06-09-2023
 
 ### Major
 

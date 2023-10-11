@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4] 12-10-2023
+
+### Patch
+
+- Activity Bar integration
+- Edits are stored
+- Menu reorintation
+
 ## [1.0.3] 11-09-2023
 
 ### Patch

@@ -578,7 +578,8 @@
         util.each(row, function (r, val) {
           arr.push({
             index: x,
-            value: val
+            value: val,
+            editable: false
           })
           x++
         })
@@ -593,8 +594,10 @@
       util.each(values, function (i, data) {
         const input = inputs[data.index]
         input.value = data.value
-        input.classList.add('disabled')
         input.tabIndex = -1
+        if (!data.editable) {
+          input.classList.add('disabled')
+        }
         triggerEvent(input, 'keyup')
       })
 

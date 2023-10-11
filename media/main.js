@@ -30,7 +30,23 @@ const memory = {
   },
   storeBoard: function() {
     const state = memory.read()
-    const board = game.values
+    let board = game.values
+    if (game.game.cellMatrix) {
+      board = []
+      const matrix = game.game.cellMatrix
+      for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+          val = matrix[row][col]
+          if (val.value) {
+            board.push({
+              index: (row * 9) + col,
+              value: parseInt(val.value, 10),
+              editable: !val.classList.contains('disabled')
+            })
+          }
+        }
+      }
+    }
     memory.store({
       ...state,
       board
@@ -85,6 +101,7 @@ container.addEventListener('keyup', e => {
         count++
       }
     })
+
     if (count > 80) {
       valid = game.game.validateMatrix()
       if (valid && count === 81) {
@@ -104,6 +121,7 @@ container.addEventListener('keyup', e => {
         toggleScoreboard(state.scoreboard || false)
       }
     }
+    memory.storeBoard()
   }
 }, false)
 

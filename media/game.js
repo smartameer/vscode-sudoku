@@ -570,8 +570,9 @@
       const inputs = this.game.table.getElementsByTagName('input')
       const difficulties = {
         easy: 50,
-        normal: 40,
-        hard: 30
+        normal: 42,
+        hard: 34,
+        evil: 26,
       }
 
       // Solve the game to get the solution

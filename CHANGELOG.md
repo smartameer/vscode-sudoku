@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6] 23-10-2023
+
+### Patch
+
+- New 'Evil' game mode
+
+
 ## [1.0.5] 23-10-2023
 
 ### Patch

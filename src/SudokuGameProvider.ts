@@ -6,7 +6,8 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
   public static MODE = {
     EASY: 'easy',
     NORMAL: 'normal',
-    HARD: 'hard'
+    HARD: 'hard',
+    EVIL: 'evil',
   }
 
   constructor (

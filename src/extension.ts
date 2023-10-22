@@ -53,6 +53,11 @@ export function activate (context: vs.ExtensionContext): void {
           label: SudokuGameProvider.MODE.HARD,
           picked: level === SudokuGameProvider.MODE.HARD,
           description: 'Hard mode'
+        },
+        {
+          label: SudokuGameProvider.MODE.EVIL,
+          picked: level === SudokuGameProvider.MODE.EVIL,
+          description: 'Evil mode'
         }
       ]
       quickPick.onDidChangeSelection(async (selection) => {

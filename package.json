@@ -1,7 +1,7 @@
 {
 	"name": "code-sudoku",
 	"displayName": "Sudoku Game",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
 	"publisher": "ameer",
@@ -45,7 +45,8 @@
 						"enum": [
 							"easy",
 							"normal",
-							"hard"
+							"hard",
+							"evil"
 						],
 						"default": "normal"
 					}

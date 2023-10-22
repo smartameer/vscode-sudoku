@@ -64,7 +64,9 @@
 .sudoku-container.valid-matrix input {
   color: #2e7266;
 }
-
+.sudoku-container.invalid-matrix {
+  border-color: var(--vscode-inputValidation-errorBackground);
+}
 .scoreboard {
   margin-top: 20px;
 }

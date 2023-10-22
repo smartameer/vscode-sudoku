@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5] 23-10-2023
+
+### Patch
+
+- Minor bug fix
+- Highlight game error status
+
 ## [1.0.4] 12-10-2023
 
 ### Patch

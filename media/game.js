@@ -273,6 +273,9 @@
 
       if (num !== '') {
         // Validate value
+        if (Number(num) <= 0) {
+          isValid = false
+        }
         if (
           // Make sure value is within range
           Number(num) > 0 &&
@@ -619,7 +622,7 @@
       let isValid
 
       isValid = this.game.validateMatrix()
-      this.game.table.classList.toggle('valid-matrix', isValid)
+      this.highlightGameValidity(isValid)
       return isValid
     },
 
@@ -628,18 +631,14 @@
      * board.
      */
     solve: function () {
-      let isValid
       // Make sure the board is valid first
       if (!this.game.validateMatrix()) {
+        this.highlightGameValidity(false)
         return false
       }
 
       // Solve the game
-      isValid = this.game.solveGame(0, 0)
-
-      // Visual indication of whether the game was solved
-      this.game.table.classList.toggle('valid-matrix', isValid)
-
+      const isValid = this.game.solveGame(0, 0)
       if (isValid) {
         const inputs = this.game.table.getElementsByTagName('input')
 
@@ -647,6 +646,18 @@
           input.classList.add('disabled')
           input.tabIndex = -1
         })
+      }
+      this.highlightGameValidity(isValid)
+    },
+
+    highlightGameValidity: function (isValid) {
+      if (isValid) {
+        this.game.table.classList.toggle('valid-matrix', true)
+      } else {
+        this.game.table.classList.toggle('invalid-matrix', true)
+        setTimeout(() => {
+          this.game.table.classList.toggle('invalid-matrix', false)
+        }, 2000)
       }
     }
   }

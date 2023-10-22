@@ -84,7 +84,12 @@ container.addEventListener('click', e => {
 
   if (el) {
     inputs.forEach(input => {
-      input.classList.toggle('highlight', input.value && input.value === el.value)
+      if (input.value && input.value === el.value) {
+        input.classList.toggle('highlight', true)
+        setTimeout(() => {
+          input.classList.toggle('highlight', false)
+        }, 1000)
+      }
     })
   }
 }, false)

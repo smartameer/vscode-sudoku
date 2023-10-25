@@ -1,7 +1,7 @@
 {
 	"name": "code-sudoku",
 	"displayName": "Sudoku Game",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
 	"publisher": "ameer",
@@ -49,6 +49,15 @@
 							"evil"
 						],
 						"default": "normal"
+					},
+					"sudoku.gameTheme": {
+						"title": "Game theme",
+						"type": "string",
+						"enum": [
+							"editor",
+							"original"
+						],
+						"default": "editor"
 					}
 				}
 			}
@@ -105,6 +114,13 @@
 				"shortTitle": "Level"
 			},
 			{
+				"command": "sudoku.theme",
+				"category": "Sudoku",
+				"title": "Change theme",
+				"icon": "$(color-mode)",
+				"shortTitle": "Theme"
+			},
+			{
 				"command": "sudoku.scoreboard.show",
 				"category": "Sudoku",
 				"title": "Show scoreboard",
@@ -123,7 +139,12 @@
 			"view/title": [
 				{
 					"command": "sudoku.settings",
-					"group": "1_header@1",
+					"group": "2_main@1",
+					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.theme",
+					"group": "2_main@2",
 					"when": "view == sudoku.game"
 				},
 				{
@@ -138,18 +159,40 @@
 				},
 				{
 					"command": "sudoku.solve",
-					"group": "2_main@1",
+					"group": "1_header@1",
 					"when": "view == sudoku.game"
 				},
 				{
 					"command": "sudoku.scoreboard.show",
-					"group": "1_header@2",
+					"group": "2_main@3",
 					"when": "view == sudoku.game && sudoku-scoreboard == false"
 				},
 				{
 					"command": "sudoku.scoreboard.hide",
-					"group": "1_header@2",
+					"group": "2_main@3",
 					"when": "view == sudoku.game && sudoku-scoreboard == true"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "sudoku.scoreboard.show",
+					"when": "false"
+				},
+				{
+					"command": "sudoku.scoreboard.hide",
+					"when": "false"
+				},
+				{
+					"command": "sudoku.validate",
+					"when": "false"
+				},
+				{
+					"command": "sudoku.solve",
+					"when": "false"
+				},
+				{
+					"command": "sudoku.theme",
+					"when": "false"
 				}
 			]
 		}

@@ -84,6 +84,38 @@ export function activate (context: vs.ExtensionContext): void {
       })
       quickPick.onDidHide(() => quickPick.dispose)
       quickPick.show()
+    }),
+    vs.commands.registerCommand('sudoku.theme', async () => {
+      const theme = vs.workspace.getConfiguration().get('sudoku.gameTheme')
+      const quickPick = vs.window.createQuickPick()
+      quickPick.title = 'Sudoku theme'
+      quickPick.items = [
+        {
+          label: SudokuGameProvider.THEMES.EDITOR,
+          picked: theme === SudokuGameProvider.THEMES.EDITOR,
+          description: 'Default (vscode editor theme)'
+        },
+        {
+          label: SudokuGameProvider.THEMES.ORIGINAL,
+          picked: theme === SudokuGameProvider.THEMES.ORIGINAL,
+          description: 'Original'
+        }
+      ]
+      quickPick.onDidChangeSelection(async (selection) => {
+        if (selection.length > 0 && theme !== selection[0].label) {
+          void vs.workspace.getConfiguration().update(
+            'sudoku.gameTheme',
+            selection[0].label,
+            vs.ConfigurationTarget.Global
+          ).then(async () => {
+            await provider.setTheme(selection[0].label)
+          })
+        }
+        quickPick.hide()
+        return true
+      })
+      quickPick.onDidHide(() => quickPick.dispose)
+      quickPick.show()
     })
   )
 }

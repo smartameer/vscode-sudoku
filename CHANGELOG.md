@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.7] 25-10-2023
+
+### Patch
+
+- Original theme & Editor theme
+
 ## [1.0.6] 23-10-2023
 
 ### Patch

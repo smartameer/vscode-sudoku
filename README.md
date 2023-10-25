@@ -16,21 +16,13 @@ Sudoku is a logic puzzle game that involves filling a 9x9 grid with numbers from
 ### Feature
 ---
 - Available in Explorer Side panel
-- Color theme mode supported
-- Three game modes (Easy, Normal, Hard, Evil)
+- Editor color theme mode supported including original theme
+- Four game modes (Easy, Normal, Hard, Evil)
 
 ### Control + Command
 ---
 - New game
-- Validate game
-- Solve game
-
-### Author
----
-[![Ameer](https://avatars.githubusercontent.com/u/5998873?v=4&s=70)](https://github.com/smartameer) |
-:---: |
-[ameer](https://github.com/smartameer) |
-
+- Game level
 
 ### LICENSE
 ---

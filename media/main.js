@@ -163,6 +163,16 @@ window.addEventListener('message', event => {
         scoreboard: message.state
       })
       break
+    case 'theme':
+      const theme = message.theme
+      const list =  document.querySelector('.container').parentElement.classList
+      if (theme === 'original') {
+        list.remove('editor-theme')
+        list.add('original-theme')
+      } else {
+        list.remove('original-theme')
+        list.add('editor-theme')
+      }
   }
 })
 

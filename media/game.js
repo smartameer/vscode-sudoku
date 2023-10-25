@@ -600,7 +600,7 @@
         input.value = data.value
         input.tabIndex = -1
         if (!data.editable) {
-          input.classList.add('disabled')
+          input.classList.add('disabled', 'original')
         }
         triggerEvent(input, 'keyup')
       })

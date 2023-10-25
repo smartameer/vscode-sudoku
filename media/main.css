@@ -6,6 +6,14 @@
   box-sizing: border-box;
   user-select: none;
 }
+.original-theme .sudoku-container {
+  --vscode-focusBorder: #000000;
+  --vscode-input-background: #ffffff;
+  --vscode-inputValidation-infoBackground: #9be6ac;
+  --vscode-inputValidation-errorBackground: #f8adb3;
+  --vscode-foreground: #000000;
+  --vscode-input-foreground: #000000;
+}
 .sudoku-container {
   margin: 20px auto 0;
   position: relative;
@@ -49,6 +57,9 @@
   color: var(--vscode-input-foreground);
   opacity: 0.5;
 }
+.original-theme .sudoku-container input.disabled {
+  opacity: 0.85;
+}
 .sudoku-container input.disabled.highlight {
   background-color: var(--vscode-inputValidation-infoBackground);
 }
@@ -63,6 +74,9 @@
 }
 .sudoku-container.valid-matrix input {
   color: #2e7266;
+}
+.sudoku-container.valid-matrix input.original {
+  background-color: #ddd;
 }
 .sudoku-container.invalid-matrix {
   border-color: var(--vscode-inputValidation-errorBackground);

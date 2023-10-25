@@ -10,6 +10,11 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
     EVIL: 'evil',
   }
 
+  public static THEMES = {
+    ORIGINAL: 'original',
+    EDITOR: 'editor'
+  }
+
   constructor (
     private readonly _extensionUri: vscode.Uri
   ) { }
@@ -28,7 +33,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
       ]
     }
 
-    webviewView.webview.html = this.getWebviewContent(webviewView.webview)
+
     if (!vscode.workspace.getConfiguration().has('sudoku.gameLevel')) {
       void vscode.workspace.getConfiguration().update(
         'sudoku.gameLevel',
@@ -36,6 +41,15 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
         vscode.ConfigurationTarget.Global
       )
     }
+    if (!vscode.workspace.getConfiguration().has('sudoku.gameTheme')) {
+      void vscode.workspace.getConfiguration().update(
+        'sudoku.gameTheme',
+        SudokuGameProvider.THEMES.EDITOR,
+        vscode.ConfigurationTarget.Global
+      )
+    }
+
+    webviewView.webview.html = this.getWebviewContent(webviewView.webview, vscode.workspace.getConfiguration().get('sudoku.gameTheme', SudokuGameProvider.THEMES.EDITOR))
     webviewView.webview.onDidReceiveMessage(message => {
       switch(message.command) {
         case 'scoreboard':
@@ -45,7 +59,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
     })
   }
 
-  private getWebviewContent (webview: vscode.Webview): string {
+  private getWebviewContent (webview: vscode.Webview, theme: string): string {
     const nonce = this.getNonce()
     const scriptGamePathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'game.js')
     const scriptGameUri = webview.asWebviewUri(scriptGamePathOnDisk)
@@ -64,7 +78,7 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
           <link href="${styleMainUri.toString()}" rel="stylesheet">
         </head>
         <body data-vscode-context='{"preventDefaultContextMenuItems":true,"webviewSection":"game"}'>
-          <div class="wrap">
+          <div class="wrap ${theme}-theme">
             <div class="container"></div>
             <div class="scoreboard"></div>
           </div>
@@ -103,5 +117,10 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
   public async scoreboard (state: boolean): Promise<void> {
     const currentView = this._view
     await currentView?.webview.postMessage({ command: 'scoreboard', state })
+  }
+
+  public async setTheme (theme: string) {
+    const currentView = this._view
+    await currentView?.webview.postMessage({ command: 'theme', theme })
   }
 }

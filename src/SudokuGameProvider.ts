@@ -3,6 +3,7 @@ import * as vscode from 'vscode'
 export default class SudokuGameProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = 'sudoku.game'
   private _view?: vscode.WebviewView
+  private _callback?: any
   public static MODE = {
     EASY: 'easy',
     NORMAL: 'normal',
@@ -33,7 +34,6 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
       ]
     }
 
-
     if (!vscode.workspace.getConfiguration().has('sudoku.gameLevel')) {
       void vscode.workspace.getConfiguration().update(
         'sudoku.gameLevel',
@@ -52,8 +52,8 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
     webviewView.webview.html = this.getWebviewContent(webviewView.webview, vscode.workspace.getConfiguration().get('sudoku.gameTheme', SudokuGameProvider.THEMES.EDITOR))
     webviewView.webview.onDidReceiveMessage(message => {
       switch(message.command) {
-        case 'scoreboard':
-          vscode.commands.executeCommand('setContext', 'sudoku-scoreboard', message.state)
+        case 'scores':
+          this._callback(message.data)
           break
       }
     })
@@ -80,7 +80,6 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
         <body data-vscode-context='{"preventDefaultContextMenuItems":true,"webviewSection":"game"}'>
           <div class="wrap ${theme}-theme">
             <div class="container"></div>
-            <div class="scoreboard"></div>
           </div>
           <script nonce="${nonce}" src="${scriptGameUri.toString()}"></script>
           <script nonce="${nonce}" src="${scriptUri.toString()}"></script>
@@ -114,9 +113,10 @@ export default class SudokuGameProvider implements vscode.WebviewViewProvider {
     await currentView?.webview.postMessage({ command: 'validate' })
   }
 
-  public async scoreboard (state: boolean): Promise<void> {
+  public async fetchScores (callback: any): Promise<void> {
+    this._callback = callback
     const currentView = this._view
-    await currentView?.webview.postMessage({ command: 'scoreboard', state })
+    await currentView?.webview.postMessage({ command: 'scores' })
   }
 
   public async setTheme (theme: string) {

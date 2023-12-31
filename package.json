@@ -1,7 +1,7 @@
 {
 	"name": "code-sudoku",
 	"displayName": "Sudoku Game",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "Vscode Sudoku Game",
 	"main": "./build/extension.js",
 	"publisher": "ameer",
@@ -76,77 +76,75 @@
 				{
 					"type": "webview",
 					"id": "sudoku.game",
-					"name": "Sudoku",
+					"name": "Game",
 					"visibility": "visible",
 					"contextualTitle": "Sudoku",
 					"initialSize": 260,
 					"icon": "media/icon.svg"
+				},
+				{
+					"type": "tree",
+					"id": "sudoku.scoreboard",
+					"name": "Scoreboard",
+					"visibility": "visible",
+					"contextualTitle": "Sudoku",
+					"initialSize": 260,
+					"icon": "$(gift)"
 				}
 			]
 		},
+		"viewsWelcome": [
+			{
+			  	"view": "sudoku.scoreboard",
+			  	"contents": "No scores recorded.\nEnjoy playing sudoku game and win."
+			}
+		],
 		"commands": [
 			{
 				"command": "sudoku.new",
-				"category": "Sudoku",
+				"category": "Game",
 				"title": "New game",
 				"icon": "$(empty-window)",
 				"shortTitle": "New"
 			},
 			{
 				"command": "sudoku.solve",
-				"category": "Sudoku",
+				"category": "Game",
 				"title": "Solve game",
 				"icon": "$(play)",
 				"shortTitle": "Solve"
 			},
 			{
 				"command": "sudoku.validate",
-				"category": "Sudoku",
+				"category": "Game",
 				"title": "Validate game",
 				"icon": "$(check-all)",
 				"shortTitle": "Validate"
 			},
 			{
 				"command": "sudoku.settings",
-				"category": "Sudoku",
+				"category": "Game",
 				"title": "Game level",
 				"icon": "$(gear)",
 				"shortTitle": "Level"
 			},
 			{
 				"command": "sudoku.theme",
-				"category": "Sudoku",
+				"category": "Game",
 				"title": "Change theme",
 				"icon": "$(color-mode)",
 				"shortTitle": "Theme"
 			},
 			{
-				"command": "sudoku.scoreboard.show",
-				"category": "Sudoku",
+				"command": "sudoku.scoreboard.refresh",
+				"category": "Scoreboard",
 				"title": "Show scoreboard",
-				"icon": "$(verified)",
+				"icon": "$(refresh)",
 				"shortTitle": "Show scoreboard"
-			},
-			{
-				"command": "sudoku.scoreboard.hide",
-				"category": "Sudoku",
-				"title": "Hide scoreboard",
-				"icon": "$(verified-filled)",
-				"shortTitle": "Hide scoreboard"
 			}
 		],
 		"menus": {
 			"view/title": [
-				{
-					"command": "sudoku.settings",
-					"group": "2_main@1",
-					"when": "view == sudoku.game"
-				},
-				{
-					"command": "sudoku.theme",
-					"group": "2_main@2",
-					"when": "view == sudoku.game"
-				},
 				{
 					"command": "sudoku.new",
 					"group": "navigation@2",
@@ -163,25 +161,22 @@
 					"when": "view == sudoku.game"
 				},
 				{
-					"command": "sudoku.scoreboard.show",
-					"group": "2_main@3",
-					"when": "view == sudoku.game && sudoku-scoreboard == false"
+					"command": "sudoku.scoreboard.refresh",
+					"group": "navigation@1",
+					"when": "view == sudoku.scoreboard"
 				},
 				{
-					"command": "sudoku.scoreboard.hide",
-					"group": "2_main@3",
-					"when": "view == sudoku.game && sudoku-scoreboard == true"
+					"command": "sudoku.settings",
+					"group": "2_header@1",
+					"when": "view == sudoku.game"
+				},
+				{
+					"command": "sudoku.theme",
+					"group": "2_header@2",
+					"when": "view == sudoku.game"
 				}
 			],
 			"commandPalette": [
-				{
-					"command": "sudoku.scoreboard.show",
-					"when": "false"
-				},
-				{
-					"command": "sudoku.scoreboard.hide",
-					"when": "false"
-				},
 				{
 					"command": "sudoku.validate",
 					"when": "false"
@@ -192,6 +187,10 @@
 				},
 				{
 					"command": "sudoku.theme",
+					"when": "false"
+				},
+				{
+					"command": "sudoku.scoreboard.refresh",
 					"when": "false"
 				}
 			]

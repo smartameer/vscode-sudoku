@@ -15,9 +15,9 @@ Sudoku is a logic puzzle game that involves filling a 9x9 grid with numbers from
 
 ### Feature
 ---
-- Available in Explorer Side panel
-- Editor color theme mode supported including original theme
+- Editor color theme mode supported including original theme of Sudoku game
 - Four game modes (Easy, Normal, Hard, Evil)
+- Scoreboard
 
 ### Control + Command
 ---

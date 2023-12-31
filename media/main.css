@@ -81,27 +81,3 @@
 .sudoku-container.invalid-matrix {
   border-color: var(--vscode-inputValidation-errorBackground);
 }
-.scoreboard {
-  margin-top: 20px;
-}
-.scoreboard .scores {
-  border: 3px solid var(--vscode-focusBorder);
-  width: 340px;
-  border-collapse: collapse;
-}
-.scoreboard .scores thead {
-  background-color: var(--vscode-input-background);
-}
-.scoreboard .scores tr > td,
-.scoreboard .scores tr {
-  border-spacing: none;
-  border: 1px solid var(--vscode-focusBorder);
-}
-.scoreboard .scores td {
-  text-align: left;
-  font-size: 13px;
-  min-width: 30px;
-  padding: 8px;
-  color: var(--vscode-foreground);
-  text-transform: capitalize;
-}

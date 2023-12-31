@@ -1,16 +1,22 @@
-import * as vs from 'vscode'
+import * as vscode from 'vscode'
 import SudokuGameProvider from './SudokuGameProvider'
+import { ScoreProvider } from './ScoreProvider'
 
-export function activate (context: vs.ExtensionContext): void {
+export function activate (context: vscode.ExtensionContext): void {
   const provider = new SudokuGameProvider(context.extensionUri)
 
   context.subscriptions.push(
-    vs.window.registerWebviewViewProvider(SudokuGameProvider.viewType, provider)
+    vscode.window.registerWebviewViewProvider(SudokuGameProvider.viewType, provider)
+  )
+
+  const scoreProvider = new ScoreProvider(context)
+  context.subscriptions.push(
+    vscode.window.registerTreeDataProvider(ScoreProvider.viewType, scoreProvider)
   )
 
   context.subscriptions.push(
-    vs.commands.registerCommand('sudoku.new', async () => {
-      const ack = await vs.window.showInformationMessage(
+    vscode.commands.registerCommand('sudoku.new', async () => {
+      const ack = await vscode.window.showInformationMessage(
         'Do you want to start a new game?',
         'Yes',
         'No'
@@ -19,24 +25,21 @@ export function activate (context: vs.ExtensionContext): void {
         await provider.newGame()
       }
     }),
-    vs.commands.registerCommand('sudoku.solve', async () => {
+    vscode.commands.registerCommand('sudoku.solve', async () => {
       await provider.solveGame()
-      // await vs.window.showInformationMessage('Current game is solved')
+      // await vscode.window.showInformationMessage('Current game is solved')
     }),
-    vs.commands.registerCommand('sudoku.scoreboard.show', async () => {
-      await vs.commands.executeCommand('setContext', 'sudoku-scoreboard', true)
-      await provider.scoreboard(true)
+    vscode.commands.registerCommand('sudoku.scoreboard.refresh', () => {
+      provider.fetchScores((data: any[]) => {
+        scoreProvider.refresh(data)
+      })
     }),
-    vs.commands.registerCommand('sudoku.scoreboard.hide', async () => {
-      await vs.commands.executeCommand('setContext', 'sudoku-scoreboard', false)
-      await provider.scoreboard(false)
-    }),
-    vs.commands.registerCommand('sudoku.validate', async () => {
+    vscode.commands.registerCommand('sudoku.validate', async () => {
       await provider.validateGame()
     }),
-    vs.commands.registerCommand('sudoku.settings', async () => {
-      const level = vs.workspace.getConfiguration().get('sudoku.gameLevel')
-      const quickPick = vs.window.createQuickPick()
+    vscode.commands.registerCommand('sudoku.settings', async () => {
+      const level = vscode.workspace.getConfiguration().get('sudoku.gameLevel')
+      const quickPick = vscode.window.createQuickPick()
       quickPick.title = 'Sudoku game level'
       quickPick.items = [
         {
@@ -62,12 +65,12 @@ export function activate (context: vs.ExtensionContext): void {
       ]
       quickPick.onDidChangeSelection(async (selection) => {
         if (selection.length > 0 && level !== selection[0].label) {
-          void vs.workspace.getConfiguration().update(
+          void vscode.workspace.getConfiguration().update(
             'sudoku.gameLevel',
             selection[0].label,
-            vs.ConfigurationTarget.Global
+            vscode.ConfigurationTarget.Global
           ).then(async () => {
-            const ack = await vs.window.showInformationMessage(
+            const ack = await vscode.window.showInformationMessage(
               'Do you want to start a new game in ' + selection[0].label + ' mode?',
               'Yes',
               'No'
@@ -75,7 +78,7 @@ export function activate (context: vs.ExtensionContext): void {
             if (ack === 'Yes') {
               await provider.newGame()
             } else {
-              await vs.window.showInformationMessage('Your next game will be in ' + selection[0].label + ' mode.')
+              await vscode.window.showInformationMessage('Your next game will be in ' + selection[0].label + ' mode.')
             }
           })
         }
@@ -85,9 +88,9 @@ export function activate (context: vs.ExtensionContext): void {
       quickPick.onDidHide(() => quickPick.dispose)
       quickPick.show()
     }),
-    vs.commands.registerCommand('sudoku.theme', async () => {
-      const theme = vs.workspace.getConfiguration().get('sudoku.gameTheme')
-      const quickPick = vs.window.createQuickPick()
+    vscode.commands.registerCommand('sudoku.theme', async () => {
+      const theme = vscode.workspace.getConfiguration().get('sudoku.gameTheme')
+      const quickPick = vscode.window.createQuickPick()
       quickPick.title = 'Sudoku theme'
       quickPick.items = [
         {
@@ -103,10 +106,10 @@ export function activate (context: vs.ExtensionContext): void {
       ]
       quickPick.onDidChangeSelection(async (selection) => {
         if (selection.length > 0 && theme !== selection[0].label) {
-          void vs.workspace.getConfiguration().update(
+          void vscode.workspace.getConfiguration().update(
             'sudoku.gameTheme',
             selection[0].label,
-            vs.ConfigurationTarget.Global
+            vscode.ConfigurationTarget.Global
           ).then(async () => {
             await provider.setTheme(selection[0].label)
           })
@@ -118,6 +121,14 @@ export function activate (context: vs.ExtensionContext): void {
       quickPick.show()
     })
   )
+
+  vscode.window.createTreeView(ScoreProvider.viewType, {
+		treeDataProvider: scoreProvider,
+		showCollapseAll: true
+	})
+  setTimeout(() => {
+    vscode.commands.executeCommand('sudoku.scoreboard.refresh')
+  }, 1000)
 }
 
 export function deactivate() {}

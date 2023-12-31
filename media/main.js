@@ -123,7 +123,6 @@ container.addEventListener('keyup', e => {
           date: new Date().getTime(),
           board: flatten(game.values)
         })
-        toggleScoreboard(state.scoreboard || false)
       }
     }
     memory.storeBoard()
@@ -155,13 +154,9 @@ window.addEventListener('message', event => {
     case 'validate':
       game.validate()
       break
-    case 'scoreboard':
+    case 'scores':
       const state = memory.read()
-      toggleScoreboard(message.state)
-      memory.store({
-        ...state,
-        scoreboard: message.state
-      })
+      vscode.postMessage({command: 'scores', data: state.scores})
       break
     case 'theme':
       const theme = message.theme
@@ -176,33 +171,6 @@ window.addEventListener('message', event => {
   }
 })
 
-function toggleScoreboard(state) {
-  const scoreboard = document.querySelector('.scoreboard')
-  scoreboard.innerHTML = ''
-  if (state) {
-    const values = memory.read()
-    if (values?.scores && values.scores.length > 0) {
-      const table = document.createElement('table')
-      table.classList.add('scores')
-      const headRow = table.createTHead().insertRow(0)
-      headRow.insertCell(0).innerHTML = '#'
-      headRow.insertCell(1).innerHTML = 'Level'
-      headRow.insertCell(2).innerHTML = 'Date'
-      const body = table.createTBody()
-      const reverse = function (arr) {
-        return arr.map(arr.pop, [...arr])
-      }
-      reverse(values.scores).forEach(function(score, index) {
-        var row = body.insertRow(index)
-        row.insertCell(0).innerHTML = values.scores.length - index
-        row.insertCell(1).innerHTML = score.mode
-        row.insertCell(2).innerHTML = new Date(score.date).toLocaleString()
-      })
-      scoreboard.appendChild(table)
-    }
-  }
-}
-
 game.game.config.validate_on_insert = true;
 const state = memory.read()
 game.game.config.difficulty = state.level || 'normal'
@@ -212,6 +180,4 @@ if (state?.board && state.board !== null && Object.keys(state.board).length > 0)
 } else {
   game.start()
 }
-vscode.postMessage({ command: 'scoreboard', state: state.scoreboard })
-toggleScoreboard(state.scoreboard || false)
 memory.storeBoard()

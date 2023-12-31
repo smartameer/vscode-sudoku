@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.8] 31-12-2023
+
+### Patch
+
+- Scoreboard tree view
+
 ## [1.0.7] 25-10-2023
 
 ### Patch
